@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <title>Realtime Location Tracker</title>
+    <link rel="icon" type="image/x-icon" href="img/ico.png">
+    <link rel="stylesheet" href="src\style.css" />
+  </head>
+  <body>
+    <div id="signature">
+      <a href="https://github.com/ExtraMediumDev/SafeJourney" target="_blank">GitHub</a>
+    </div>
+    <main>
+      <header>
+        <img src="img/ico.png" height="90" id="logo" />
+        <h2 id="title">Realtime Location Tracker</h2>
+      </header>
+      
+      <fieldset>
+        <legend>Anonymous Login</legend>
+        <input
+          type="text"
+          id="nickname"
+          placeholder="Enter a nickname..."
+          maxlength="15"
+          autocomplete="off"
+        />
+        <button id="addBtn">Add my location to the map</button>
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          Don't forget to grant location permissions and enable location sharing.
+        </div>
+        <div class="alert">
+          <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+          You can test it by logging in with two different devices.
+        </div>
+        <div id="latestLocations">
+          <h3 id="showList">Latest Locations <i id="arrow" class="arrow down"></i></h3>
+          <ul id="locationList" class="hide"></ul>
+        </div>
+      </fieldset>
+      
+      <div id="locations"></div>
+    </main>
+    <script src="src\main.js" type="module"></script>
+    <script>
+      ((g) => {
+        var h,
+          a,
+          k,
+          p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set(),
+          e = new URLSearchParams(),
+          u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+              await (a = m.createElement("script"));
+              e.set("libraries", [...r] + "");
+              for (k in g)
+                e.set(
+                  k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
+                  g[k]
+                );
+              e.set("callback", c + ".maps." + q);
+              a.src = `https://maps.${c}apis.com/maps/api/js?` + e + "&map_ids=1cba8dbadb4e76cc" + "&libraries=marker";
+              d[q] = f;
+              a.onerror = () => (h = n(Error(p + " could not load.")));
+              a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+              m.head.append(a);
+            }));
+        d[l]
+          ? console.warn(p + " only loads once. Ignoring:", g)
+          : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+      })({
+        key: "AIzaSyA1eMhgn51896SisT_AIXgNNv5YeeQJMWQ",
+      });
+    </script>
+  </body>
+</html>
